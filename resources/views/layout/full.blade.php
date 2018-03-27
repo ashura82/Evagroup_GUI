@@ -18,6 +18,7 @@
     {{ Html::style('/css/ie10-viewport-bug-workaround.css') }}
     {{ Html::style('/css/dashboard.css') }}
     {{ Html::style('/css/style.css') }}
+    <link href="css/jquery.circliful.css" rel="stylesheet" type="text/css" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -39,6 +40,12 @@
             @include('layout.sidebar')
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <ol class="breadcrumb">
+                @section('breadcrumb')
+                    <li><i class="fa fa-home" aria-hidden="true"></i></li>
+                @show
+            </ol>
+            <h1> @yield('title') </h1>
             @yield('content')
         </div>
     </div>
@@ -49,7 +56,8 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 {{ Html::script('js/bootstrap.min.js') }}
-{{ Html::script('ie10-viewport-bug-workaround.js') }}
+{{ Html::script('js/ie10-viewport-bug-workaround.js') }}
+{{ Html::script('js/jquery.circliful.js') }}
 @yield('scripts')
 </body>
 </html>
