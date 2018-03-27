@@ -13,9 +13,12 @@ class WebsitesController extends Controller
 
     public function addVhost(Input $input){
         $key = $input->get('key');
-        $conf = $input->get('conf');
+        $ip = $input->get('ip');
+        $port = $input->get('port');
+        $mail = $input->get('mail');
+        $name = $input->get('name');
         try {
-            return VhostHelper::add($key, $conf);
+            return VhostHelper::add($key, $ip, $port, $mail, $name);
         } catch (\Exception $e) {
             throw $e;
         }
@@ -58,6 +61,17 @@ class WebsitesController extends Controller
         } catch (\Exception $e) {
             throw $e;
         }
+    }
+
+    public function getStatus(){
+        try{
+            $status = Nginx\StatusHelper::get();
+            dd($status);
+            return view('websites.vhosts', compact('vhosts'));
+        } catch (\Exception $e){
+            dd($e);
+        }
+        return null;
     }
 
 }

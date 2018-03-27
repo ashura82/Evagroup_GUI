@@ -5,6 +5,7 @@
 @endsection
 
 @section('breadcrumb')
+    @parent
     <li class="active">Websites</li>
 @endsection
 

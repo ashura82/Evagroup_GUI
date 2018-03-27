@@ -15,7 +15,6 @@
                 <td>
                     <a href="{{ route('websites.vhost', ['key' => $vhost->name]) }}">Voir</a>
                     <a href="{{ route('websites.vhost.edit', ['key' => $vhost->name]) }}">Modifier</a>
-                    <a href="#">Supprimer</a>
                 </td>
             </tr>
         @endforeach

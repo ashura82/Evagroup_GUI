@@ -19,6 +19,10 @@ Route::group(['prefix' => 'api'], function(){
     Route::group(['prefix' => '/metrics'], function(){
         Route::get('/cpu', ['as' => 'api.metrics.cpu', 'uses' => 'Api\MetricsController@getCpu']);
         Route::get('/ram', ['as' => 'api.metrics.ram', 'uses' => 'Api\MetricsController@getRam']);
+        Route::get('/disk', ['as' => 'api.metrics.disk', 'uses' => 'Api\MetricsController@getDisk']);
+        Route::get('/network-rx', ['as' => 'api.metrics.network-rx', 'uses' => 'Api\MetricsController@getNetworkRx']);
+        Route::get('/network-tx', ['as' => 'api.metrics.network-tx', 'uses' => 'Api\MetricsController@getNetworkTx']);
+        Route::get('/mem-and-disk', ['as' => 'api.metrics.mem-and-disk', 'uses' => 'Api\MetricsController@getMemAndDisk']);
     });
     Route::group(['prefix' => 'websites'], function(){
         Route::post('/add', ['as' => 'api.websites.add', 'uses' => 'Api\WebsitesController@addVhost']);
@@ -53,4 +57,7 @@ Route::group(['prefix' => 'websites'], function(){
     Route::get('/vhost/add', ['as' => 'websites.vhost.add', 'uses' => 'WebsitesController@vhostAdd']);
     Route::get('/vhost/{key?}', ['as' => 'websites.vhost', 'uses' => 'WebsitesController@vhost']);
     Route::get('/vhost/{key?}/edit', ['as' => 'websites.vhost.edit', 'uses' => 'WebsitesController@vhostEdit']);
+    Route::get('/vhost/{key?}/enable', ['as' => 'websites.vhost.enable', 'uses' => 'WebsitesController@vhostEnable']);
+    Route::get('/vhost/{key?}/disable', ['as' => 'websites.vhost.disable', 'uses' => 'WebsitesController@vhostDisable']);
+    Route::get('/vhost/{key?}/delete', ['as' => 'websites.vhost.delete', 'uses' => 'WebsitesController@vhostDelete']);
 });

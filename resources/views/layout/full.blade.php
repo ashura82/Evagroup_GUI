@@ -42,7 +42,7 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ol class="breadcrumb">
                 @section('breadcrumb')
-                    <li><i class="fa fa-home" aria-hidden="true"></i></li>
+                    <li><a href="{{ route('index') }}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                 @show
             </ol>
             <h1> @yield('title') </h1>

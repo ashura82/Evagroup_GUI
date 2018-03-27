@@ -15,7 +15,6 @@ class MetricsController extends Controller
         $text = "Usage CPU";
         $valueText = $value;
         return view('api.metrics.cpu', compact('value', 'id', 'unit', 'text', 'valueText'));
-        // $net_t = MetricsHelper::getNetworkTx();
     }
 
     public function getRam() {
@@ -27,12 +26,31 @@ class MetricsController extends Controller
         $text = "Usage ram";
         $unit = "MiB";
         return view('api.metrics.ram', compact('value', 'id', 'unit', 'text', 'valueText'));
+    }
 
-
+    public function getDisk() {
+        $id = uniqid();
+        $disk_t = MetricsHelper::getDiskTotal();
+        $disk_u = MetricsHelper::getDiskUsed();
+        $value = round((($disk_u * 100) / $disk_t), 2);
+        $valueText = $disk_u;
+        $text = "Espace occupé";
+        $unit = "GiB";
+        return view('api.metrics.disk', compact('value', 'id', 'unit', 'text', 'valueText'));
     }
 
     public function getNetworkRx(){
         $net_r = MetricsHelper::getNetworkRx();
+        return $net_r;
+    }
 
+    public function getNetworkTx(){
+        $net_t = MetricsHelper::getNetworkTx();
+        return $net_t;
+    }
+
+    public function getMemAndDisk(){
+        $datas = MetricsHelper::getMemAndDisk();
+        return $datas;
     }
 }

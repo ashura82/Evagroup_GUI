@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Nginx\StatusHelper as StatusHelper;
 use App\Helpers\Nginx\VhostHelper as VhostHelper;
+use Illuminate\Support\Facades\Input;
 
 class WebsitesController extends Controller
 {
@@ -23,14 +24,35 @@ class WebsitesController extends Controller
         return view('websites.edit', compact('key'));
     }
 
-    public function getStatus(){
-        try{
-            $status = StatusHelper::get();
-            dd($status);
-            return view('websites.vhosts', compact('vhosts'));
+    public function vhostEnable(Input $input, $key){
+        try {
+            VhostHelper::enableDisable($key, true);
         } catch (\Exception $e){
-            dd($e);
+
+        } finally {
+            $route = $input->get('referer') ? : route('websites.index');
+            return redirect($route);
         }
-        return null;
+    }
+
+    public function vhostDisable(Input $input, $key){
+        try {
+            VhostHelper::enableDisable($key, false);
+        } catch (\Exception $e){
+
+        } finally {
+            $route = $input->get('referer') ? : route('websites.index');
+            return redirect($route);
+        }
+    }
+
+    public function vhostDelete($key){
+        try {
+            VhostHelper::delete($key);
+        } catch (\Exception $e){
+
+        } finally {
+            return redirect()->route('websites.index');
+        }
     }
 }

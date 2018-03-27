@@ -36,6 +36,16 @@ class MetricsHelper {
         return $metrics['mem_t'];
     }
 
+    public static function getDiskTotal(){
+        $metrics = self::getMetrics();
+        return $metrics['disk_total'];
+    }
+
+    public static function getDiskUsed(){
+        $metrics = self::getMetrics();
+        return ($metrics['disk_total'] - $metrics['disk_free']);
+    }
+
     public static function getNetworkRx(){
         $metrics = self::getMetrics();
         return $metrics['net_r'];
@@ -44,6 +54,19 @@ class MetricsHelper {
     public static function getNetworkTx(){
         $metrics = self::getMetrics();
         return $metrics['net_s'];
+    }
+
+    public static function getMemAndDisk(){
+        $disk_u = self::getDiskUsed();
+        $disk_t = self::getDiskTotal();
+        $ram_u = self::getMemoryUsed();
+        $ram_t = self::getMemoryTotal();
+        return json_encode([
+            "disk_u" => $disk_u,
+            "disk_t" => $disk_t,
+            "ram_u" => $ram_u,
+            "ram_t" => $ram_t
+        ]);
     }
 
 }

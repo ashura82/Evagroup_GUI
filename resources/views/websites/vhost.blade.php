@@ -5,6 +5,7 @@
 @endsection
 
 @section('breadcrumb')
+    @parent
     <li><a href="{{ route('websites.index') }}">Websites</a></li>
     <li class="active">{{ $key }}</li>
 @endsection

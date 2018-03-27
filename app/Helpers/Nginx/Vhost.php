@@ -42,6 +42,30 @@ class VhostHelper {
         }
     }
 
+    public static function add($key, $ip, $port, $mail, $name)
+    {
+        if (!$key || !$ip || !$port || !$mail || !$name) {
+            throw new \Exception('Les champs ne sont pas tous remplis');
+        }
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') . "/add_vhost/";
+        $client = new GuzzleHttp\Client();
+        $request = [
+            'form_params' => [
+                'ip' => $ip,
+                'mail' => $mail,
+                'port' => $port,
+                'vhost' => $key,
+                'name' => $name
+            ]
+        ];
+        try {
+            $res = $client->request('POST', $url, $request);
+            return $res->getBody()->getContents();
+        } catch (\Exception $e) {
+            return $e;
+        }
+    }
+
     public static function edit($key, $conf){
         if(!$key){
             throw new \Exception('Pas de clé');
@@ -62,6 +86,38 @@ class VhostHelper {
             return $res->getBody()->getContents();
         } catch (\Exception $e){
             return $e;
+        }
+    }
+
+    public static function enableDisable($key, $enable = true){
+        if(!$key){
+            throw new \Exception('Pas de clé');
+        }
+        $client = new GuzzleHttp\Client();
+        if($enable){
+            $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') . "/" . $key ."/enable";
+        } else {
+            $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') . "/" . $key ."/disable";
+        }
+        $res = $client->get($url);
+        if($res->getStatusCode() == 200){
+            return collect(json_decode($res->getBody()->getContents()));
+        } else {
+            throw new \Exception('Impossible de récupérer les Vhosts');
+        }
+    }
+
+    public static function delete($key){
+        if(!$key){
+            throw new \Exception('Pas de clé');
+        }
+        $client = new GuzzleHttp\Client();
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') ."/remove_vhost/" . $key;
+        $res = $client->get($url);
+        if($res->getStatusCode() == 200){
+            return collect(json_decode($res->getBody()->getContents()));
+        } else {
+            throw new \Exception('Impossible de récupérer les Vhosts');
         }
     }
 
