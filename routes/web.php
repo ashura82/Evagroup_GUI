@@ -34,6 +34,11 @@ Route::group(['prefix' => 'api'], function(){
             Route::post('/{key?}/form', ['as' => 'api.websites.vhost.form', 'uses' => 'Api\WebsitesController@postVhostForm']);
         });
     });
+    Route::group(['prefix' => '/firewall'], function(){
+        Route::get('/liste', ['as' => 'api.firewall.liste', 'uses' => 'Api\FirewallController@getListe']);
+        Route::get('/ping-ip', ['as' => 'api.firewall.ping-ip', 'uses' => 'Api\FirewallController@getPingIps']);
+        Route::post('/recherche-ip', ['as' => 'api.firewall.recherche-ip', 'uses' => 'Api\FirewallController@postRechercheIp']);
+    });
 });
 
 Route::group(['prefix' => 'charts'], function(){
@@ -60,4 +65,15 @@ Route::group(['prefix' => 'websites'], function(){
     Route::get('/vhost/{key?}/enable', ['as' => 'websites.vhost.enable', 'uses' => 'WebsitesController@vhostEnable']);
     Route::get('/vhost/{key?}/disable', ['as' => 'websites.vhost.disable', 'uses' => 'WebsitesController@vhostDisable']);
     Route::get('/vhost/{key?}/delete', ['as' => 'websites.vhost.delete', 'uses' => 'WebsitesController@vhostDelete']);
+});
+
+Route::group(['prefix' => 'firewall'],function(){
+    Route::get('/', ['as' => 'firewall.index', 'uses' => 'FirewallController@index']);
+    Route::get('/start-csf', ['as' => 'firewall.start-csf', 'uses' => 'FirewallController@startCsf']);
+    Route::get('/shutdown-csf', ['as' => 'firewall.shutdown-csf', 'uses' => 'FirewallController@shutdownCsf']);
+    Route::get('/restart-csf', ['as' => 'firewall.shutdown-csf', 'uses' => 'FirewallController@restartCsf']);
+    Route::post('/allow-csf-ip', ['as' => 'firewall.allow-csf-ip', 'uses' => 'FirewallController@allowCsfIp']);
+    Route::post('/remove-csf-ip', ['as' => 'firewall.remove-csf-ip', 'uses' => 'FirewallController@removeCsfIp']);
+    Route::post('/deny-csf-ip', ['as' => 'firewall.deny-csf-ip', 'uses' => 'FirewallController@denyCsfIp']);
+    Route::post('/unlock-csf-ip', ['as' => 'firewall.unlock-csf-ip', 'uses' => 'FirewallController@unlockCsfIp']);
 });

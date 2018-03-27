@@ -17,6 +17,7 @@
     {{ Html::style('/css/bootstrap.min.css') }}
     {{ Html::style('/css/ie10-viewport-bug-workaround.css') }}
     {{ Html::style('/css/dashboard.css') }}
+    {{ Html::style('/css/toastr.css') }}
     {{ Html::style('/css/style.css') }}
     <link href="css/jquery.circliful.css" rel="stylesheet" type="text/css" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -58,6 +59,8 @@
 {{ Html::script('js/bootstrap.min.js') }}
 {{ Html::script('js/ie10-viewport-bug-workaround.js') }}
 {{ Html::script('js/jquery.circliful.js') }}
+{{ Html::script('js/toastr.min.js') }}
 @yield('scripts')
+{!! Toastr::render() !!}
 </body>
 </html>

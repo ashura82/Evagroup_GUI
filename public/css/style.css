@@ -16,3 +16,7 @@
 .spin-animate {
     animation: spin 2s linear infinite;
 }
+
+.modal-xl {
+    width: 98%;
+}
