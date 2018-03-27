@@ -10,7 +10,7 @@ class MetricsHelper {
     private static function getMetrics(){
         $metrics = Cache::remember('metrics_datas', 0.05, function(){
             $client = new GuzzleHttp\Client();
-            $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') ."/metrics";
+            $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') ."/metrics";
             $res = $client->get($url);
             if($res->getStatusCode() == 200){
                 return collect(json_decode($res->getBody()->getContents()));

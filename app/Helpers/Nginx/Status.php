@@ -8,7 +8,7 @@ class StatusHelper {
 
     public static function get(){
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') ."/nginx_status";
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') ."/nginx_status";
         dd($url);
         $res = $client->get($url);
         if($res->getStatusCode() == 200){

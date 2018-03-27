@@ -15,7 +15,7 @@ class FirewallHelper {
 
     public static function startCsf(){
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') ."/start_csf";
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') ."/start_csf";
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
             return $res->getBody()->getContents();
@@ -26,7 +26,7 @@ class FirewallHelper {
 
     public static function shutdownCsf(){
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') ."/shutdown_csf";
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') ."/shutdown_csf";
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
             return $res->getBody()->getContents();
@@ -37,7 +37,7 @@ class FirewallHelper {
 
     public static function restartCsf(){
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') ."/restart_csf";
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') ."/restart_csf";
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
             return $res->getBody()->getContents();
@@ -48,7 +48,7 @@ class FirewallHelper {
 
     public static function getListe(){
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') . "/list_csf_iptable";
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') . "/list_csf_iptable";
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
             return $res->getBody()->getContents();
@@ -59,7 +59,7 @@ class FirewallHelper {
 
     public static function rechercheIp($ip){
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') . "/grep_csf_ip/" . $ip;
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') . "/grep_csf_ip/" . $ip;
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
             return $res->getBody()->getContents();
@@ -70,7 +70,7 @@ class FirewallHelper {
 
     public static function pingIps(){
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') . "/ping_ip_csf";
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') . "/ping_ip_csf";
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
             return $res->getBody()->getContents();
@@ -81,7 +81,7 @@ class FirewallHelper {
 
     public static function allowCsfIp($ip){
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') . "/allow_csf_ip/" . $ip;
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') . "/allow_csf_ip/" . $ip;
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
             return $res->getBody()->getContents();
@@ -92,7 +92,7 @@ class FirewallHelper {
 
     public static function removeCsfIp($ip){
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') . "/remove_csf_ip/" . $ip;
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') . "/remove_csf_ip/" . $ip;
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
             return $res->getBody()->getContents();
@@ -103,7 +103,7 @@ class FirewallHelper {
 
     public static function denyCsfIp($ip){
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') . "/deny_csf_ip/" . $ip;
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') . "/deny_csf_ip/" . $ip;
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
             return $res->getBody()->getContents();
@@ -114,7 +114,7 @@ class FirewallHelper {
 
     public static function unlockCsfIp($ip){
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') . "/unlock_csf_ip/" . $ip;
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') . "/unlock_csf_ip/" . $ip;
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
             return $res->getBody()->getContents();

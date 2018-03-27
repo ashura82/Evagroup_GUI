@@ -10,7 +10,7 @@ class VhostHelper {
 
     public static function all(){
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') ."/view_vhosts";
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') ."/view_vhosts";
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
             return collect(json_decode($res->getBody()->getContents()));
@@ -24,7 +24,7 @@ class VhostHelper {
             throw new \Exception('Pas de clé');
         }
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') ."/details/" . $key;
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') ."/details/" . $key;
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
             try{
@@ -47,7 +47,7 @@ class VhostHelper {
         if (!$key || !$ip || !$port || !$mail || !$name) {
             throw new \Exception('Les champs ne sont pas tous remplis');
         }
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') . "/add_vhost/";
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') . "/add_vhost/";
         $client = new GuzzleHttp\Client();
         $request = [
             'form_params' => [
@@ -73,7 +73,7 @@ class VhostHelper {
         if(!$conf){
             throw new \Exception('Pas de configuration');
         }
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') ."/edit_vhost/";
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') ."/edit_vhost/";
         $client = new GuzzleHttp\Client();
         $request = [
             'form_params' => [
@@ -95,9 +95,9 @@ class VhostHelper {
         }
         $client = new GuzzleHttp\Client();
         if($enable){
-            $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') . "/" . $key ."/enable";
+            $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') . "/" . $key ."/enable";
         } else {
-            $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') . "/" . $key ."/disable";
+            $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') . "/" . $key ."/disable";
         }
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
@@ -112,7 +112,7 @@ class VhostHelper {
             throw new \Exception('Pas de clé');
         }
         $client = new GuzzleHttp\Client();
-        $url = "http://" . getenv('API_IP') . ":" . getenv('API_HOST') ."/remove_vhost/" . $key;
+        $url = "http://" . getenv('API_IP') . ":" . getenv('API_PORT') ."/remove_vhost/" . $key;
         $res = $client->get($url);
         if($res->getStatusCode() == 200){
             return collect(json_decode($res->getBody()->getContents()));
