@@ -5,6 +5,7 @@ Ce projet permet de gérer le reverse proxy via une interface web. Il a été r�
 # Lancement script installation automatique
 Pour lancer l'automatisation de l'installation, un script d'installation `install.sh` est diponible à la racine du projet.
 Ce script installe toutes les dépendances necessaires, clone ce projet et paramètre automatiquement apache.
+# Le port à renseigner pour le serveur nginx est le 8010, c'est le port de l'API
 
 Prérequis :
 
