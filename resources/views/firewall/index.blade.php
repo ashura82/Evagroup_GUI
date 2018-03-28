@@ -12,16 +12,13 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="panel {{ $active ? 'panel-success' : 'panel-danger' }}">
+            <div class="panel panel-default">
                 <div class="panel-heading clearfix">
                     <div class="pull-right">
-                        @if($active)
-                            <a href="{{ route('firewall.shutdown-csf') }}" class="btn btn-warning">Désactiver</a>
-                        @else
-                            <a href="{{ route('firewall.start-csf') }}" class="btn btn-success">Activer</a>
-                        @endif
+                        <a href="{{ route('firewall.start-csf') }}" class="btn btn-success">Activer</a>
+                        <a href="{{ route('firewall.shutdown-csf') }}" class="btn btn-warning">Désactiver</a>
                     </div>
-                    <h4>Le pare-feu est {{ $active ? 'actif' : 'inactif' }}</h4>
+                    <h4>Pare-feu</h4>
                 </div>
                 <div class="panel-body">
                     <div class="text-right">

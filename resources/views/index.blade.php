@@ -33,11 +33,11 @@
     <div class="row">
         <div class="col-md-5">
             <ul class="list-group">
-                <li class="list-group-item"><a href="#" data-tile="" data-file="daemon.log" class="btn-log btn-block">deamon.log</a></li>
-                <li class="list-group-item"><a href="#" data-tile="" data-file="lfd.log" class="btn-log btn-block">lfd.log</a></li>
-                <li class="list-group-item"><a href="#" data-tile="" data-file="auth.log" class="btn-log btn-block">auth.log</a></li>
-                <li class="list-group-item"><a href="#" data-tile="" data-file="csf.allow" class="btn-log btn-block">csf.allow</a></li>
-                <li class="list-group-item"><a href="#" data-tile="" data-file="csf.deny" class="btn-log btn-block">csf.deny</a></li>
+                <li class="list-group-item"><a href="#" data-tile="Daemon.log" data-file="daemon.log" class="btn-log btn-block">Deamon.log</a></li>
+                <li class="list-group-item"><a href="#" data-tile="Lfd.log" data-file="lfd.log" class="btn-log btn-block">Lfd.log</a></li>
+                <li class="list-group-item"><a href="#" data-tile="Auth.log" data-file="auth.log" class="btn-log btn-block">Auth.log</a></li>
+                <li class="list-group-item"><a href="#" data-tile="Csf.allow" data-file="csf.allow" class="btn-log btn-block">Csf.allow</a></li>
+                <li class="list-group-item"><a href="#" data-tile="Csf.deny" data-file="csf.deny" class="btn-log btn-block">Csf.deny</a></li>
             </ul>
         </div>
     </div>
