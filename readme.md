@@ -2,6 +2,15 @@
 
 Ce projet permet de gérer le reverse proxy via une interface web. Il a été réalisé sous Laravel 5.6 et se connecte à une API distante sur le reverse proxy.
 
+# Lancement script installation automatique
+Pour lancer l'automatisation de l'installation, un script d'installation `install.sh` est diponible à la racine du projet.
+Ce script installe toutes les dépendances necessaires, clone ce projet et paramètre automatiquement apache.
+
+Prérequis :
+
+* être sous le compte root de la machine
+* connection à internet fonctionnelle
+* le script ne fonctionne que sur Debian. Le script a été testé sur Debian9
 
 # Fonctionnalités
 
