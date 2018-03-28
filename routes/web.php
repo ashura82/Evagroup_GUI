@@ -14,6 +14,7 @@
 Auth::routes();
 
 Route::get('/', ['as' => 'index', 'uses' => 'IndexController@index']);
+Route::post('/log', ['as' => 'index.log', 'uses' => 'IndexController@log']);
 
 Route::group(['prefix' => 'api'], function(){
     Route::group(['prefix' => '/metrics'], function(){

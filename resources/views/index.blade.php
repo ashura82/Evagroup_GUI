@@ -28,6 +28,33 @@
             </ul>
         </div>
     </div>
+    <hr>
+    <h2>Fichiers de logs</h2>
+    <div class="row">
+        <div class="col-md-5">
+            <ul class="list-group">
+                <li class="list-group-item"><a href="#" data-tile="" data-file="daemon.log" class="btn-log btn-block">deamon.log</a></li>
+                <li class="list-group-item"><a href="#" data-tile="" data-file="lfd.log" class="btn-log btn-block">lfd.log</a></li>
+                <li class="list-group-item"><a href="#" data-tile="" data-file="auth.log" class="btn-log btn-block">auth.log</a></li>
+                <li class="list-group-item"><a href="#" data-tile="" data-file="csf.allow" class="btn-log btn-block">csf.allow</a></li>
+                <li class="list-group-item"><a href="#" data-tile="" data-file="csf.deny" class="btn-log btn-block">csf.deny</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" id="modal-evagroup" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -49,12 +76,12 @@
                 method: "GET",
                 url: "{{ route('api.metrics.cpu') }}"
             })
-            .done(function( data ) {
-                $("#cpu-wrapper").html(data);
-            })
-            .fail(function( data ) {
-                console.error(data);
-            });
+                .done(function( data ) {
+                    $("#cpu-wrapper").html(data);
+                })
+                .fail(function( data ) {
+                    console.error(data);
+                });
         }
 
         function displayRam(){
@@ -62,12 +89,12 @@
                 method: "GET",
                 url: "{{ route('api.metrics.ram') }}"
             })
-            .done(function( data ) {
-                $("#ram-wrapper").html(data);
-            })
-            .fail(function( data ) {
-                console.error(data);
-            });
+                .done(function( data ) {
+                    $("#ram-wrapper").html(data);
+                })
+                .fail(function( data ) {
+                    console.error(data);
+                });
         }
 
         function displayDisk(){
@@ -75,12 +102,12 @@
                 method: "GET",
                 url: "{{ route('api.metrics.disk') }}"
             })
-            .done(function( data ) {
-                $("#disk-wrapper").html(data);
-            })
-            .fail(function( data ) {
-                console.error(data);
-            });
+                .done(function( data ) {
+                    $("#disk-wrapper").html(data);
+                })
+                .fail(function( data ) {
+                    console.error(data);
+                });
         }
 
         function displayNetworkRx(){
@@ -88,12 +115,12 @@
                 method: "GET",
                 url: "{{ route('api.metrics.network-rx') }}"
             })
-            .done(function( data ) {
-                $("#network-rx-wrapper").html(data);
-            })
-            .fail(function( data ) {
-                console.error(data);
-            });
+                .done(function( data ) {
+                    $("#network-rx-wrapper").html(data);
+                })
+                .fail(function( data ) {
+                    console.error(data);
+                });
         }
 
         function displayNetworkTx(){
@@ -101,12 +128,12 @@
                 method: "GET",
                 url: "{{ route('api.metrics.network-tx') }}"
             })
-            .done(function( data ) {
-                $("#network-tx-wrapper").html(data);
-            })
-            .fail(function( data ) {
-                console.error(data);
-            });
+                .done(function( data ) {
+                    $("#network-tx-wrapper").html(data);
+                })
+                .fail(function( data ) {
+                    console.error(data);
+                });
         }
 
         function getMemAndDisk(){
@@ -114,16 +141,40 @@
                 method: "GET",
                 url: "{{ route('api.metrics.mem-and-disk') }}"
             })
+                .done(function( data ) {
+                    var tmp = JSON.parse(data);
+                    $("#ram-used-wrapper").html(tmp.ram_u + " MiB");
+                    $("#ram-total-wrapper").html(tmp.ram_t + " MiB");
+                    $("#disk-used-wrapper").html(tmp.disk_u + " GiB");
+                    $("#disk-total-wrapper").html(tmp.disk_t + " GiB");
+                })
+                .fail(function( data ) {
+                    console.error(data);
+                });
+        }
+
+        $(".btn-log").click(function(){
+            var title = $(this).data('title');
+            var file = $(this).data('file');
+            $("#modal-evagroup .modal-content .modal-body").html('<div class="loader"></div>');
+            $("#modal-evagroup .modal-content .modal-title").text(title);
+            $("#modal-evagroup").modal();
+            $.ajax({
+                method: "POST",
+                url: "{{ route('index.log') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    file: file
+                }
+            })
             .done(function( data ) {
-                var tmp = JSON.parse(data);
-                $("#ram-used-wrapper").html(tmp.ram_u + " MiB");
-                $("#ram-total-wrapper").html(tmp.ram_t + " MiB");
-                $("#disk-used-wrapper").html(tmp.disk_u + " GiB");
-                $("#disk-total-wrapper").html(tmp.disk_t + " GiB");
+                $("#modal-evagroup .modal-content .modal-body").html("");
+                $("#modal-evagroup .modal-content .modal-body").html("<pre>" + data + "</pre>");
             })
             .fail(function( data ) {
                 console.error(data);
+                $("#modal-evagroup").modal('hide');
             });
-        }
+        });
     </script>
 @endsection
